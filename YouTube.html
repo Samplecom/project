@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Homepage Clone</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<style>
+  
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffffff;
+    padding: 10px 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.logo img {
+    height: 40px;
+}
+
+.search-bar {
+    display: flex;
+    flex: 1;
+    max-width: 600px;
+    max-height: 50px;
+    margin: 0 20px;
+    border-radius: 50%;
+}
+.search-bar img{
+    height: 20px;
+    margin-right: 5px;
+}
+
+.search-bar input {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+}
+
+.search-bar button {
+    padding: 8px;
+    background-color: #f1f1f1;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+.header-icons button {
+    background: none;
+    border: none;
+    margin: 0 5px;
+    font-size: 20px;
+    cursor: pointer;
+   
+}
+.header-icons img{
+    height: 20px;
+    margin-right: 5px;
+    border-radius: 50%;
+}
+.categories {
+    display: flex;
+    padding: 10px 20px;
+    background-color: #ffffff;
+    overflow-x: auto;
+    white-space: nowrap;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.categories button {
+    background-color: #e0e0e0;
+    border: none;
+    padding: 8px 16px;
+    margin: 0 5px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.categories button:hover {
+    background-color: #d0d0d0;
+}
+
+main {
+    padding: 20px;
+}
+
+.video-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.video-card {
+    background-color: #ffffff;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+
+
+.video-card img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.video-info h4 {
+    margin: 10px 0 5px 0;
+    font-size: 16px;
+}
+
+.video-info p {
+    font-size: 14px;
+    color: #606060;
+}
+
+</style>
+
+<body>
+    <header>
+        <div class="logo">
+            <img src="data:image/png;base64,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" alt="YouTube Logo">
+        </div>
+        <div class="search-bar">
+            <input type="text" placeholder="Search">
+            <button><img src="C:\Users\R SUMAN\Downloads\search.jpeg"></button>
+        </div>
+        <div class="header-icons">
+            <button><img src="C:\Users\R SUMAN\OneDrive\Desktop\youtube clone\vid icon.png"></button>
+            <button>🔔</button>
+            <button><img src="C:\Users\R SUMAN\OneDrive\Desktop\youtube clone\mahesh.webp"></button>
+        </div>
+    </header>
+
+    <nav class="categories">
+        <button>All</button>
+        <button>JavaScript</button>
+        <button>Job Interviews</button>
+        <button>Tests</button>
+        <button>Data astructures</button>
+        <button>AI</button>
+        <button>GIT</button>
+        <button>Sales</button>
+        <button>Civil Engineering</button>
+        <button>University</button>
+        <!-- Add more categories as needed -->
+    </nav>
+
+    <main>
+        <div class="video-grid">
+            <div class="video-card">
+                <img src="C:\Users\R SUMAN\Downloads\thumb.jpeg" alt="Video Thumbnail">
+                <div class="video-info">
+                    <h4>How Interview Process is Shifting from DSA Rounds</h4>
+                    <p>Love Babbar • 45K views • 22 hours ago</p>
+                </div>
+            </div>
+            <div class="video-card">
+                <img src="C:\Users\R SUMAN\Downloads\video4.jpeg" alt="Video Thumbnail">
+                <div class="video-info">
+                    <h4>Dealing with Career Transitions</h4>
+                    <p>Self Dev • 80K views • 1 week ago</p>
+                </div>
+            </div>
+            <div class="video-card">
+                <img src="C:\Users\R SUMAN\Downloads\video4.jpeg" alt="Video Thumbnail">
+                <div class="video-info">
+                    <h4>Mastering Data Structures in JavaScript</h4>
+                    <p>Tech Guru • 100K views • 3 days ago</p>
+                </div>
+                
+                
+            </div>
+            <!-- Add more video cards as needed -->
+        </div>
+    </main>
+</body>
+
+</html>
