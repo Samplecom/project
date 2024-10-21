@@ -1,0 +1,149 @@
+1. let shoppingCart = ['Milk', 'Coffee', 'Tea', 'Honey'];
+
+
+if (!shoppingCart.includes('Meat')) {
+  shoppingCart.unshift('Meat');
+}
+
+
+if (!shoppingCart.includes('Sugar')) {
+  shoppingCart.push('Sugar');
+}
+
+
+const allergicToHoney = true;  
+if (allergicToHoney && shoppingCart.includes('Honey')) {
+  shoppingCart = shoppingCart.filter(item => item !== 'Honey');
+}
+
+
+const teaIndex = shoppingCart.indexOf('Tea');
+if (teaIndex !== -1) {
+  shoppingCart[teaIndex] = 'Green Tea';
+}
+
+console.log(shoppingCart);
+
+2. const ages = [19, 22, 19, 24, 20, 25, 26, 24, 25, 24];
+
+
+ages.sort((a, b) => a - b);
+console.log("Sorted ages:", ages);
+
+
+const minAge = ages[0];
+const maxAge = ages[ages.length - 1];
+console.log("Min age:", minAge);
+console.log("Max age:", maxAge);
+
+
+let medianAge;
+const mid = Math.floor(ages.length / 2);
+if (ages.length % 2 === 0) {
+  medianAge = (ages[mid - 1] + ages[mid]) / 2; // Average of the two middle items
+} else {
+  medianAge = ages[mid]; 
+}
+console.log("Median age:", medianAge);
+
+
+const total = ages.reduce((sum, age) => sum + age, 0);
+const averageAge = total / ages.length;
+console.log("Average age:", averageAge);
+
+
+const range = maxAge - minAge;
+console.log("Range of ages:", range);
+
+
+const minDiff = Math.abs(minAge - averageAge);
+const maxDiff = Math.abs(maxAge - averageAge);
+console.log("Min - Average:", minDiff);
+console.log("Max - Average:", maxDiff);
+
+
+
+
+3. 
+const student = { name: "John", age: 20 };
+Object.preventExtensions(student);
+
+
+const extensibleStatus = Object.isExtensible(student);
+
+
+const teacher = { subject: "Math" };
+
+
+Object.seal(teacher);
+
+
+const sealedStatus = Object.isSealed(teacher);
+
+
+console.log("Is student object extensible?:", extensibleStatus);
+console.log("Is teacher object sealed?:", sealedStatus);
+
+
+4.  
+let students = [
+  { id: 1, firstName: 'John', lastName: 'Doe', age: 18, grade: 'A' },
+  { id: 2, firstName: 'Jane', lastName: 'Smith', age: 19, grade: 'B' },
+  { id: 3, firstName: 'Mike', lastName: 'Johnson', age: 17, grade: 'C' },
+  { id: 4, firstName: 'Emily', lastName: 'Davis', age: 18, grade: 'A' }
+];
+
+
+function addStudent(id, firstName, lastName, age, grade) {
+  const studentExists = students.some(student => student.id === id);
+  
+  if (studentExists) {
+    console.log("Student with this ID already exists.");
+  } else {
+    const newStudent = { id, firstName, lastName, age, grade };
+    students.push(newStudent);
+    console.log("Student added successfully.");
+  }
+}
+
+
+function updateStudent(id, updatedData) {
+  const studentIndex = students.findIndex(student => student.id === id);
+
+  if (studentIndex === -1) {
+    console.log("Student not found.");
+  } else {
+    students[studentIndex] = { ...students[studentIndex], ...updatedData };
+    console.log("Student updated successfully.");
+  }
+}
+
+
+function deleteStudent(id) {
+  const studentIndex = students.findIndex(student => student.id === id);
+
+  if (studentIndex === -1) {
+    console.log("Student not found.");
+  } else {
+    students.splice(studentIndex, 1);
+    console.log("Student deleted successfully.");
+  }
+}
+
+
+function displayStudents() {
+  if (students.length === 0) {
+    console.log("No students available.");
+  } else {
+    students.forEach(student => {
+      console.log(`ID: ${student.id}, Name: ${student.firstName} ${student.lastName}, Age: ${student.age}, Grade: ${student.grade}`);
+    });
+  }
+}
+
+
+addStudent(5, 'Sara', 'Connor', 20, 'B');     
+updateStudent(3, { age: 18, grade: 'B' });    
+deleteStudent(2);                             
+displayStudents();                            
+
